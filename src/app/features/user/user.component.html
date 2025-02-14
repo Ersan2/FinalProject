@@ -1,0 +1,37 @@
+<h1> All User</h1>
+
+<div (click)="processOnCreate()" class="btn">Create User</div>
+
+<!-- Външен компонент, който се храни с данни от CustomerPage -->
+<cc-data-grid
+  [inputHeaderConfig] = "dataGridMapping"
+  [inputDataSource]   = "userCollection"
+
+  [inputIsNavigatable]   = "true"
+  [inputIsRemovable]     = "true"
+
+  (onEdit)            = "processOnEdit($event)"
+  (onRemove)          = "processOnDelete($event)"
+  (onNavigate)        = "processOnNavigate($event)">
+</cc-data-grid>
+
+
+@if(isEditFormVisible && selectedUser) {
+  <!-- Вариант номер 1 -->
+    <input [(ngModel)]="selectedUser.firstName"
+        type="text">
+    <input [(ngModel)]="selectedUser.lastName"
+        type="text">
+    <input [(ngModel)]="selectedUser.nickname"
+        type="text">
+  <button (click)="processOnSave()">Save</button>
+}
+
+
+@if(isCreateFormVisible) {
+  <!-- Вариант номер 1 -->
+  <input #saveInput type="text">
+  <input #saveInput1 type="text">
+  <input #saveInput2 type="text">
+  <button (click)="processOnCreateUser(saveInput.value,saveInput1.value,saveInput2.value)">Save</button>
+}
